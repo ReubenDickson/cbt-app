@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRoutes); // Mount authentication routes
+// This code initializes an Express.js application for a Computer-Based Test (CBT) system backend.
 
 // Routes
 app.get('/', (req, res) => {
