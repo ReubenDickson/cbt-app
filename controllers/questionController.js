@@ -5,7 +5,7 @@ exports.createQuestion = async (req, res) => {
     try {
         const question = new Question(req.body);
         await question.save();
-        req.status(201).json({ message: "Question created", question });
+        res.status(201).json({ message: "Question created", question });
     } catch (err) {
         res.status(500).json({ message: "Error creating question", error: err.message });
     }
