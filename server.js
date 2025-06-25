@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const questionRoutes = require('./routes/questionRoutes');
 const examRoutes = require('./routes/examRoutes');
 
@@ -16,6 +17,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes); // Mount authentication routes
+app.use("/api/admin/auth", adminRoutes); // Mount admin management routes
 // This code initializes an Express.js application for a Computer-Based Test (CBT) system backend.
 
 app.use("/api/questions", questionRoutes); // Mount question management routes
