@@ -4,7 +4,7 @@ const Question = require("../models/Question");
 // Create exam
 exports.createExam = async (req, res) => {
     try {
-        const { title, coursecode, date, startTime, endTime, duration, questionIds } = req.body;
+        const { title, courseCode, date, startTime, endTime, duration, questionIds } = req.body;
 
         const exam = new Exam({
             title,
