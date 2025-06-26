@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const studentSchema = new mongoose.Schema({
     name: {
@@ -21,7 +21,7 @@ const studentSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Student', studentSchema);
+export default mongoose.model('Student', studentSchema);
 // This schema defines the structure of a Student document in MongoDB.
 // It includes fields for name, matriculation number, email, and password hash.
 // Each field has validation rules such as required and uniqueness where applicable.

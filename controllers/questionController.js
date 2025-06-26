@@ -1,7 +1,7 @@
-const Question = require("../models/Question");
+import Question from "../models/Question.js";
 
 // Create question
-exports.createQuestion = async (req, res) => {
+export const createQuestion = async (req, res) => {
     try {
         const question = new Question(req.body);
         await question.save();
@@ -12,7 +12,7 @@ exports.createQuestion = async (req, res) => {
 };
 
 // Get all questions filter by course
-exports.getQuestions = async (req, res) => {
+export const getQuestions = async (req, res) => {
     try {
         const { courseCode } = req.query;
         const filter = courseCode ? { courseCode } : {};
@@ -24,7 +24,7 @@ exports.getQuestions = async (req, res) => {
 };
 
 // Delete a question
-exports.deleteQuestion = async (req, res) => {
+export const deleteQuestion = async (req, res) => {
     try {
         await Question.findByIdAndDelete(req.params.id);
         res.json({ message: "Question deleted" });
@@ -34,7 +34,7 @@ exports.deleteQuestion = async (req, res) => {
 };
 
 // Update q question
-exports.updateQuestion = async (req, res) => {
+export const updateQuestion = async (req, res) => {
     try {
         await Question.findByIdAndUpdate(req.params.id);
         res.json({ message: "Question updated" });
