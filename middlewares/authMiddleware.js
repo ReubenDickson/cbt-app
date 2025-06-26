@@ -14,7 +14,7 @@ export const protectStudent = (req, res, next) => {
         if (decoded.role !== "student") {
             return res.status(403).json({ message: 'Forbidden access' });
         }
-        request.student = decoded;
+        req.student = decoded;
         next();
     } catch (error) {
         return res.status(401).json({ message: 'Invalid token' });
