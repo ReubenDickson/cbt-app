@@ -33,6 +33,7 @@ const examSchema = new mongoose.Schema({
     ]
 }, { timestamps: true });
 
+
 export default mongoose.model("Exam", examSchema);
 // This schema defines the structure for exam documents in the MongoDB database.
 // It includes fields for the exam's title, course code, date, start time, end time, duration,

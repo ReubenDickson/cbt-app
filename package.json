@@ -4,8 +4,9 @@
   "description": "CBT application for University",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "mocha --timeout 10000",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "type": "module",
   "keywords": [
@@ -24,6 +25,9 @@
     "nodemailer": "^7.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "chai": "^5.2.0",
+    "mocha": "^11.7.1",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.1"
   }
 }

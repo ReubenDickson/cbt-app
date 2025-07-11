@@ -73,6 +73,6 @@ This project is licensed under the MIT License.
 
 ## Contact  
 For any inquiries, feel free to reach out:  
-- **Email**: your.email@example.com  
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)  
-- **GitHub**: [Your GitHub Profile](https://github.com/yourusername)  
+- **Email**: reubendicksonebong@gmail.com  
+- **LinkedIn**: [Reuben Dickson on LinkedIn ](https://www.linkedin.com/in/reuben-dickson-10b071106/)  
+- **GitHub**: [Reuben Dickson on GitHub ](https://github.com/ReubenDickson)  

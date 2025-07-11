@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const protectStudent = (req, res, next) => {
+
     const authHeader = req.headers?.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
