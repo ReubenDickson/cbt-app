@@ -1,15 +1,15 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const Student = require('../models/Student');
+import Student from '../models/Student.js';
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
     const { name, matricNumber, email, password } = req.body;
 
     try {
         const existing = await Student.findOne({ matricNumber });
         if (existing) {
-            return res.status(400).json({ message: 'Matriculation number already exists' });
+            return res.status(400).json({ message: 'Matriculation number already exists!' });
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -24,24 +24,24 @@ exports.register = async (req, res) => {
 
         await student.save();
 
-        res.status(201).json({ message: 'Student registered successfully' });
+        res.status(201).json({ message: 'Student registered successfully.' });
     } catch (err) {
-        res.status(500).json({ message: 'Server error', error: err.message });
+        res.status(500).json({ message: 'Server error!', error: err.message });
     }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
     const { matricNumber, password } = req.body;
 
     try {
         const student = await Student.findOne({ matricNumber });
         if (!student) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials!' });
         }
 
         const isMatch = await bcrypt.compare(password, student.passwordHash);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return res.status(400).json({ message: 'Invalid credentials!' });
         }
 
         const token = jwt.sign(
@@ -67,3 +67,4 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 };
+// This code defines the authentication logic for student registration and login.
