@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const examSessionSchema = new mongoose.Schema({
     studentId: {
@@ -39,7 +39,7 @@ const examSessionSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model("ExamSession", examSessionSchema);
+export default mongoose.model("ExamSession", examSessionSchema);
 // This schema defines the structure for an exam session in a Computer-Based Test (CBT) system.
 // It includes fields for student ID, exam ID, start time, submission time, answers, score, and whether the results have been emailed.
 // The `answers` field is an array of objects, each containing the question ID, selected option, and whether the answer is correct.

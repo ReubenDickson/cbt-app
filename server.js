@@ -1,12 +1,12 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
-const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-const questionRoutes = require('./routes/questionRoutes');
-const examRoutes = require('./routes/examRoutes');
-const studentExamRoutes = require('./routes/studentExamRoutes');
+import express from 'express';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import cors from 'cors';
+import authRoutes from './routes/authRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import questionRoutes from './routes/questionRoutes.js';
+import examRoutes from './routes/examRoutes.js';
+import studentExamRoutes from './routes/studentExamRoutes.js';
 
 dotenv.config();
 

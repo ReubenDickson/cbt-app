@@ -1,10 +1,10 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
     createExam,
     getExams,
     deleteExam,
-} = require('../controllers/examController');
-const { protectAdmin } = require('../middlewares/adminMiddleware');
+} from '../controllers/examController.js';
+import { protectAdmin } from '../middlewares/adminMiddleware.js';
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.post('/', protectAdmin, createExam);
 router.get('/', protectAdmin, getExams);
 router.delete('/:id', protectAdmin, deleteExam);
 
-module.exports = router;
+export default router;

@@ -1,9 +1,9 @@
-const Exam = require("../models/Exam");
-const ExamSession = require("../models/ExamSession");
-const Question = require("../models/Question");
+import Exam from "../models/Exam.js";
+import ExamSession from "../models/ExamSession.js";
+import Question from "../models/Question.js";
 
 // List today's available exams for a student
-exports.getTodaysExams = async (req, res) => {
+export const getTodaysExams = async (req, res) => {
     try {
         const today = new Date();
         const exams = await Exam.find({
@@ -19,7 +19,7 @@ exports.getTodaysExams = async (req, res) => {
 };
 
 // Start exam: fetch questions and create a session
-exports.startExam = async (req, res) => {
+export const startExam = async (req, res) => {
     try {
         const { id: examId } = req.params;
         const studentId = req.student.id;
@@ -61,7 +61,7 @@ exports.startExam = async (req, res) => {
 };
 
 // Submit exam answers
-exports.submitExam = async (req, res) => {
+export const submitExam = async (req, res) => {
     try {
         const { id: examId } = req.params;
         const studentId = req.student.id;

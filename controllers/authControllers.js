@@ -1,9 +1,9 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const Student = require('../models/Student');
+import Student from '../models/Student.js';
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
     const { name, matricNumber, email, password } = req.body;
 
     try {
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
     }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
     const { matricNumber, password } = req.body;
 
     try {

@@ -1,8 +1,8 @@
-const Exam = require("../models/Exam");
-const Question = require("../models/Question");
+import Exam from "../models/Exam.js";
+import Question from "../models/Question.js";
 
 // Create exam
-exports.createExam = async (req, res) => {
+export const createExam = async (req, res) => {
     try {
         const { title, courseCode, date, startTime, endTime, duration, questionIds } = req.body;
 
@@ -24,7 +24,7 @@ exports.createExam = async (req, res) => {
 };
 
 // Get all exams
-exports.getExams = async (req, res) => {
+export const getExams = async (req, res) => {
     try {
         const exams = await Exam.find().populate("questions");
         res.json(exams);
@@ -34,7 +34,7 @@ exports.getExams = async (req, res) => {
 };
 
 // Delete an exam
-exports.deleteExam = async (req, res) => {
+export const deleteExam = async (req, res) => {
     try {
       await Exam.findByIdAndDelete(req.params.id);
       res.json({ message: "Exam deleted" });
@@ -44,7 +44,7 @@ exports.deleteExam = async (req, res) => {
   };
 
 // Update an exam
-exports.updateExams = async (req, res) => {
+export const updateExams = async (req, res) => {
     try {
         await Exam.findByIdAndUpdate(req.params.id);
         res.json({ message: "Exam updated" });

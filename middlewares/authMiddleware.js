@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-const protectStudent = (req, res, next) => {
+export const protectStudent = (req, res, next) => {
     const authHeader = req.headers?.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -20,5 +20,3 @@ const protectStudent = (req, res, next) => {
         return res.status(401).json({ message: 'Invalid token' });
     }
 };
-
-module.exports = { protectStudent };

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const adminSchema = new mongoose.Schema({
   name: {
@@ -21,4 +21,7 @@ const adminSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model("Admin", adminSchema);
+export default mongoose.model("Admin", adminSchema);
+// This schema defines the structure for admin documents in the MongoDB database.
+// It includes fields for the admin's name, staff ID, email, and password hash.
+// The `timestamps` option automatically adds `createdAt` and `updatedAt` fields to the schema.
