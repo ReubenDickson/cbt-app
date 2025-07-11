@@ -1,4 +1,12 @@
-import app from "./app.js";
+import express from 'express';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import cors from 'cors';
+import authRoutes from './routes/authRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import questionRoutes from './routes/questionRoutes.js';
+import examRoutes from './routes/examRoutes.js';
+import studentExamRoutes from './routes/studentExamRoutes.js';
 
 
 // TODO: Mount API routes here (students, courses, questions, etc)

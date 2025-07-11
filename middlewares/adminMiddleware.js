@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export const protectAdmin = (req, res, next) => {
   const authHeader = req.headers.authorization;

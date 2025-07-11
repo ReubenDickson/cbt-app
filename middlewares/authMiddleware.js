@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 export const protectStudent = (req, res, next) => {
-    const authHeader = require.headers.authorization;
+
+    const authHeader = req.headers?.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Unauthorized access' });

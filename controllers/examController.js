@@ -44,6 +44,7 @@ export const deleteExam = async (req, res) => {
   };
 
 // Update an exam
+
 export const updateExam = async (req, res) => {
     try {
         await Exam.findByIdAndUpdate(req.params.id);
