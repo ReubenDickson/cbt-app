@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+dotenv.config({ path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env' });
 import mongoose from 'mongoose';
 import app from './app.js';
 import connectDB from './config/db.js';
@@ -14,8 +15,4 @@ connectDB().then(() => {
 }).catch((err) => {
     console.error('Failed to connect to DB:', err.message);
     process.exit(1);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 619e11d (modify app.js and server.js fixing endless loop issue)
