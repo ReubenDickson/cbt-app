@@ -14,4 +14,8 @@ connectDB().then(() => {
 }).catch((err) => {
     console.error('Failed to connect to DB:', err.message);
     process.exit(1);
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 619e11d (modify app.js and server.js fixing endless loop issue)
