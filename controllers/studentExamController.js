@@ -1,6 +1,8 @@
 import Exam from "../models/Exam.js";
 import ExamSession from "../models/ExamSession.js";
 import Question from "../models/Question.js";
+import { sendResultEmail } from "../utils/sendResultEmail.js";
+import Student from "../models/Student.js";
 
 // List today's available exams for a student
 export const getTodaysExams = async (req, res) => {
@@ -95,5 +97,20 @@ export const submitExam = async (req, res) => {
         res.json({ message: "Exam submitted successfully", score, total: exam.questions.length  });
     } catch (err) {
         res.status(500).json({ message: "Failed to submit exam", error: err.message });
+    }
+
+    const student = await Student.findById(studentId);
+    if (student && student.email) {
+        try {
+            await sendResultEmail(
+                student.email,
+                student.name,
+                exam.title,
+                score,
+                exam.questions.length
+            );
+        } catch (err) {
+            console.error("Failed to send result email:", err.message);
+        }
     }
 };
