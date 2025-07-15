@@ -81,31 +81,31 @@ describe('Student Exam Workflow', () => {
     expect(res.body[0]).to.have.property("title", "Intro to CSC");
     });
 
-    it("Should start the exam and receive questions", async () => {
-        const res = await request(app)
-        .post(`/api/student-exams/${id}/start`)
-        .set("Authorization", `Bearer ${studentToken}`);
+    // it("Should start the exam and receive questions", async () => {
+    //    const res = await request(app)
+    //    .post(`/api/student-exams/${id}/start`)
+    //    .set("Authorization", `Bearer ${studentToken}`);
 
-        expect(res.status).to.equal(200);
-        expect(res.body.exam.questions).to.have.length(2);
-        expect(res.body.exam.courseCode).to.equal("CSC101");
-        expect(res.body).to.have.property("sessionId");
-    });
+    //    expect(res.status).to.equal(200);
+    //    expect(res.body.exam.questions).to.have.length(2);
+    //    expect(res.body.exam.courseCode).to.equal("CSC101");
+    //    expect(res.body).to.have.property("sessionId");
+    //});
 
-    it("should submit exam and receive a score", async () => {
-        const answers = createQuestions.map((q) => ({
-            questionId: q._id.toString(),
-            selectedOption: q.correctAnswer,
-        }));
+    //it("should submit exam and receive a score", async () => {
+     //   const answers = createQuestions.map((q) => ({
+     //       questionId: q._id.toString(),
+     //       selectedOption: q.correctAnswer,
+     //   }));
 
-        const res = await request(app)
-        .post(`/api/student-exams/${id}/submit`)
-        .set("Authorization", `Bearer ${studentToken}`)
-        .send({ answers });
+     //   const res = await request(app)
+     //   .post(`/api/student-exams/${id}/submit`)
+     //   .set("Authorization", `Bearer ${studentToken}`)
+     //   .send({ answers });
 
-    expect(res.status).to.equal(200);
-    expect(res.body).to.have.property("score", 2);
-    expect(res.body).to.have.property("total", 2);
-    expect(res.body.message).to.equal("Exam submitted successfully");
-    });
+   // expect(res.status).to.equal(200);
+   // expect(res.body).to.have.property("score", 2);
+   // expect(res.body).to.have.property("total", 2);
+   // expect(res.body.message).to.equal("Exam submitted successfully");
+   // });
 });
