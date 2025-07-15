@@ -5,6 +5,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import questionRoutes from './routes/questionRoutes.js';
 import examRoutes from './routes/examRoutes.js';
 import studentExamRoutes from './routes/studentExamRoutes.js';
+import adminExamRoutes from './routes/adminRoutes.js';
 
 const app = express();
 
