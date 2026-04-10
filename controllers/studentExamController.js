@@ -27,14 +27,17 @@ export const startExam = async (req, res) => {
         const studentId = req.student.id;
 
         // check if already started
+        
         const exists = await ExamSession.findOne({ examId, studentId });
         if (exists) {
             return res.status(400).json({ message: "Exam already started or submitted"});
-        } else {
-            return res.status(404).json({ message: "Exam not found" });
         }
 
-        const exam = await Exam.findById(examId.populate("questions"));
+        const exam = await Exam.findById(examId).populate("questions");
+
+        if (!exam) {
+            return res.status(404).json({ message: "Exam not found" });
+        }
 
         // create session
         const session = new ExamSession({
@@ -80,7 +83,7 @@ export const submitExam = async (req, res) => {
         let score = 0;
         const results = exam.questions.map((q) => {
             const ans = answers.find((a) => a.questionId === q._id.toString());
-            const isCorrect = ans?.selectOption === q.correctAnswer;
+            const isCorrect = ans?.selectedOption === q.correctAnswer;
             if (isCorrect) score += 1;
             return {
                 questionId: q._id,
