@@ -98,22 +98,23 @@ export const submitExam = async (req, res) => {
         await session.save();
 
         res.json({ message: "Exam submitted successfully", score, total: exam.questions.length  });
+
+        const student = await Student.findById(studentId);
+        if (student && student.email) {
+            try {
+                await sendResultEmail(
+                    student.email,
+                    student.name,
+                    exam.title,
+                    score,
+                    exam.questions.length
+                );
+            } catch (err) {
+                console.error("Failed to send result email:", err.message);
+            }
+        }
+        
     } catch (err) {
         res.status(500).json({ message: "Failed to submit exam", error: err.message });
-    }
-
-    const student = await Student.findById(studentId);
-    if (student && student.email) {
-        try {
-            await sendResultEmail(
-                student.email,
-                student.name,
-                exam.title,
-                score,
-                exam.questions.length
-            );
-        } catch (err) {
-            console.error("Failed to send result email:", err.message);
-        }
     }
 };
