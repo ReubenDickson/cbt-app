@@ -7,6 +7,7 @@ import Student from "../models/Student.js";
 // List today's available exams for a student
 export const getTodaysExams = async (req, res) => {
     try {
+        const studentId = req.student.id; // get logged in student
         const today = new Date();
         const exams = await Exam.find({
             date: {
@@ -14,7 +15,29 @@ export const getTodaysExams = async (req, res) => {
                 $lt: new Date(today.setHours(23, 59, 59, 999)) // End of the day
             },
         }).select("-questions"); // Exclude questions from the exam details
-        res.json(exams);
+
+        // fectch student's session to check completion status
+        const examIds = exams.map(exam => exam._id);
+        const session = await ExamSession.find({ studentId, examId: { $in: examIds } });
+
+        // attach a "status" flag to each exam
+        const examsWithStatus = exams.map(exam => {
+            const session = sessions.find(s => s.examId.toString() === exam._id.toString());
+            let status = "pending"; // default behavior
+
+            if (session) {
+                if (session.submittedAt) {
+                    status = "completed";
+                } else {
+                    status = "in-progress"; // if they started but refreshed the paage
+                }
+            }
+
+            // convert mogoose document to standard object so we caan add fields
+            return { ...exam.toObject(), status };
+        });
+
+        res.json(examsWithStatus);
     } catch (error) {
         res.status(500).json({ message: "Failed to fetch exams", error: error.message });
     }
