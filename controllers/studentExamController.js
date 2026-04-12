@@ -7,14 +7,53 @@ import Student from "../models/Student.js";
 // List today's available exams for a student
 export const getTodaysExams = async (req, res) => {
     try {
-        const today = new Date();
+        const studentId = req.student.id; // get logged-in student
+        
+        // 1. Safe Date Math: Create explicit start and end variables
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        // 2. Fetch the exams using the safe dates
         const exams = await Exam.find({
             date: {
-                $gte: new Date(today.setHours(0, 0, 0, 0)), // Start of the day
-                $lt: new Date(today.setHours(23, 59, 59, 999)) // End of the day
+                $gte: startOfDay,
+                $lt: endOfDay
             },
         }).select("-questions"); // Exclude questions from the exam details
-        res.json(exams);
+
+        // if there are no exams for tody, lets safely return a message stating no exams for today
+        
+
+        // 3. Fix Pluralization: Extract exam IDs to find matching sessions
+        const examIds = exams.map(e => e._id);
+        
+        // 4. Fix Typo: Added the space between await and ExamSession
+        const sessions = await ExamSession.find({
+            studentId,
+            examId: { $in: examIds }
+        });
+
+        // 5. Attach a status flag to each exam
+        const examsWithStatus = exams.map(exam => {
+            const session = sessions.find(s => s.examId.toString() === exam._id.toString());
+            let status = "pending"; // default behavior
+
+            if (session) {
+                if (session.submittedAt) {
+                    status = "completed";
+                } else {
+                    status = "in-progress";
+                }
+            }
+
+            // convert mongoose document to standard object so we can add fields
+            return { ...exam.toObject(), status };
+        });
+
+        res.json(examsWithStatus);
     } catch (error) {
         res.status(500).json({ message: "Failed to fetch exams", error: error.message });
     }
